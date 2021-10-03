@@ -1,0 +1,45 @@
+image:
+  file: .gitpod.dockerfile
+
+tasks:
+  - name: initialize
+    init: |
+
+      # ------------------------------------
+      # fastify
+      # ------------------------------------
+      npm install
+      
+      # ------------------------------------
+      # httpie
+      # ------------------------------------
+      sudo apt install httpie -y
+
+      # ------------------------------------
+      # hey
+      # ------------------------------------
+      wget https://hey-release.s3.us-east-2.amazonaws.com/hey_linux_amd64
+      chmod +x hey_linux_amd64
+      sudo cp hey_linux_amd64 /usr/bin/hey
+      rm hey_linux_amd64
+
+      # ------------------------------------
+      # RustLang
+      # ------------------------------------
+      # curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+
+      clear
+      #gp sync-done prerequisites
+
+
+ports:
+  - port: 8080
+    visibility: public
+
+vscode:
+  extensions:
+    - wayou.vscode-todo-highlight
+    - coenraads.bracket-pair-colorizer-2
+    - pkief.material-icon-theme
+    - rust-lang.rust
+    - bungcip.better-toml

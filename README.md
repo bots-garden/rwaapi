@@ -114,6 +114,36 @@ http POST "${url_api}/functions/${function_name}/${function_version}" \
      DEMO_TOKEN:"hello world"
 ```
 
+## Use a forked process to call the function
+
+- The first call will load the wasm file in a new nodejs process, and then call the `handle` function
+- The `handle` function is attached to the `global` context of the child process
+- The second call will directly call the `handle` function from the `global` context of the child process
+
+### With curl
+
+```bash
+url_api=http://0.0.0.0:8080
+function_name="hello"
+function_version="0.0.0"
+data='{"name":"Bob Morane"}'
+curl -d "${data}" \
+      -H "Content-Type: application/json" \
+      -H "DEMO_TOKEN: 'hello world'" \
+      -X POST "${url_api}/functions/fork/${function_name}/${function_version}"
+```
+
+### With Httpie
+
+```bash
+url_api=http://0.0.0.0:8080
+function_name="hello"
+function_version="0.0.0"
+http POST "${url_api}/functions/fork/${function_name}/${function_version}" \
+     name=Bob \
+     DEMO_TOKEN:"hello world"
+```
+
 ## Send "some load" to the RWaAPI web application
 
 Use https://github.com/rakyll/hey

@@ -22,8 +22,11 @@ pub fn handle(parameters: String, headers: String) -> String {
   let human: Human = serde_json::from_str(&parameters).unwrap();
   let request_headers: Headers = serde_json::from_str(&headers).unwrap();
 
+  let text_content = format!("👋 Hey 😃 {}  | token: {}", human.name, request_headers.demo_token);
+
+
   let message = Message {
-      text: String::from("👋 Hey 😃 ") + &String::from(human.name) + " | token: " + &String::from(request_headers.demo_token)
+    text: text_content
   };
 
   return serde_json::to_string(&message).unwrap();

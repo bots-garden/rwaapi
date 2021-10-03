@@ -14,8 +14,6 @@ fastify.register(require('./routes/functions.fork.js'), {
   wasmProcesses: wasmProcesses
 })
 
-
-
 const start = async () => {
   try {
     await fastify.listen(8080, "0.0.0.0")

@@ -16,3 +16,17 @@ initializeWasm(`../src/${functionName}/pkg/${functionName}_bg.wasm`).then(() => 
 }).catch(error => {
   console.error("😡", error)
 })
+
+initializeWasm(`../src/${functionName}/pkg/${functionName}_bg.wasm`).then(() => {
+  console.log(handle(
+    JSON.stringify({
+      name:"Bob Morane"
+    }),
+    JSON.stringify({
+      demo_token: "this is another token"
+    })
+  )) 
+
+}).catch(error => {
+  console.error("😡", error)
+})

@@ -27,5 +27,4 @@ pub fn handle(parameters: String, headers: String) -> String {
   };
 
   return serde_json::to_string(&message).unwrap();
-  
 }

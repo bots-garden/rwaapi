@@ -8,6 +8,7 @@ fastify.register(require('fastify-static'), {
 })
 
 fastify.register(require('./routes/functions.js'), {})
+fastify.register(require('./routes/functions.fork.js'), {})
 
 
 const start = async () => {

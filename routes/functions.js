@@ -7,9 +7,6 @@ function execute(wasmFile, jsonParameters, headers, request, reply, options, fas
 
   initializeWasm(`../functions/${wasmFile}`).then(() => {
 
-    console.log("🙂", JSON.stringify(jsonParameters))
-    console.log("😝", JSON.stringify(headers))
-
     let result = handle(
       JSON.stringify(jsonParameters),
       JSON.stringify(headers)
@@ -28,7 +25,6 @@ function execute(wasmFile, jsonParameters, headers, request, reply, options, fas
 
 }
 
-
 async function wasmFunctions (fastify, options) {
 /*
 ```bash
@@ -38,7 +34,7 @@ function_version="0.0.0"
 data='{"name":"Bob Morane"}'
 curl -d "${data}" \
       -H "Content-Type: application/json" \
-      -H "DEMO_TOKEN: hello" \
+      -H "DEMO_TOKEN: 'hello world'" \
       -X POST "${url_api}/functions/${function_name}/${function_version}"
 
 url_api=$(gp url 8080)
@@ -46,7 +42,7 @@ function_name="hey"
 function_version="0.0.0"
 http POST "${url_api}/functions/${function_name}/${function_version}" \
      name=Bob \
-     DEMO_TOKEN:hello
+     DEMO_TOKEN:"hello world"
 
 url_api=$(gp url 8080)
 function_name="hello"

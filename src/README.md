@@ -6,7 +6,6 @@ cargo new --lib hello
 
 Add this to `Cargo.toml`:
 
-
 ```toml
 [lib]
 name = "hello"

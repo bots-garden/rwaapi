@@ -68,6 +68,8 @@ pub fn handle(parameters: String, headers: String) -> String {
 }
 ```
 
+🖐️ the name of the main function is **always** `handle` 🖐️
+
 ### Build and "deploy"
 
 - Build the wasm file
@@ -113,6 +115,8 @@ http POST "${url_api}/functions/${function_name}/${function_version}" \
 ```
 
 ## Send "some load" to the RWaAPI web application
+
+Use https://github.com/rakyll/hey
 
 ```bash
 url_api=http://0.0.0.0:8080

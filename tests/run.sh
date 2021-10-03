@@ -1,7 +1,7 @@
 #!/bin/bash
 
 url_api=$(gp url 8080)
-function_name="hey"
+function_name="hello"
 function_version="0.0.0"
 data='{"name":"Bob"}'
 header="DEMO_TOKEN:hello"

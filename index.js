@@ -9,8 +9,7 @@ fastify.register(require('fastify-static'), {
 
 const wasmProcesses = {}
 
-fastify.register(require('./routes/functions.js'), {})
-fastify.register(require('./routes/functions.fork.js'), {
+fastify.register(require('./routes/functions.js'), {
   wasmProcesses: wasmProcesses
 })
 

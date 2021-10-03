@@ -4,7 +4,6 @@ const { handle, initializeWasm } = pkg
 global.wasmFunction = null
 global.wasmFile = null
 
-
 function execFunction(message, process) {
   /* --- message structure ---
     {
@@ -15,21 +14,18 @@ function execFunction(message, process) {
     }
   */
   try {
-    console.log("🚀", `executing handle function of ${global.wasmFile}`)
+    //console.log("🚀", `executing handle function of ${global.wasmFile}`)
     let result = handle(
       JSON.stringify(message.jsonParameters),
       JSON.stringify(message.headers)
     )
-    
     process.send({success: result})
   } catch(error) {
-    console.error("😡", error)
-
+    //console.error("😡", error)
     process.send({failure: error})
     throw error // 🤔
   }
 }
-
 
 function loadWasmFile(message, process) {
   /* --- message structure ---
@@ -50,11 +46,9 @@ function loadWasmFile(message, process) {
     execFunction(message, process)
     
   }).catch(error => {
-    console.error(`😡 ${error}`)
-
+    //console.error(`😡 ${error}`)
     process.send({failure: error})
     throw error // 🤔
-
   })
 }
 
@@ -68,7 +62,7 @@ process.on("message", async (message) => {
     }
   */
 
-  console.log(`🤖> message received from parent process:`, message)
+  //console.log(`🤖> message received from parent process:`, message)
 
   switch (message.cmd) {
     case "load":
@@ -79,7 +73,6 @@ process.on("message", async (message) => {
       execFunction(message, process)
       break;
       
-
     default:
       break;
   }

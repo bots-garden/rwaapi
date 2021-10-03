@@ -58,8 +58,6 @@ function loadWasmFile(message, process) {
   })
 }
 
-
-
 process.on("message", async (message) => {
   /* --- message structure ---
     {

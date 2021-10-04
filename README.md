@@ -125,51 +125,52 @@ function_version="0.0.0"
 data='{"name":"Bob"}'
 header="DEMO_TOKEN:'hello world'"
 
-hey -n 300 -c 150 -m POST -T "Content-Type: application/json" -H "${header}" -d ${data} "${url_api}/functions/${function_name}/${function_version}" 
+hey -n 10000 -c 1000 -m POST -T "Content-Type: application/json" -H "DEMO_TOKEN:hello" -d ${data} "${url_api}/functions/${function_name}/${function_version}" 
 ```
 
 > Result sample:
 ```text
+
 Summary:
-  Total:        0.5082 secs
-  Slowest:      0.3363 secs
-  Fastest:      0.0094 secs
-  Average:      0.1614 secs
-  Requests/sec: 590.2821
+  Total:        4.6011 secs
+  Slowest:      2.4104 secs
+  Fastest:      0.0742 secs
+  Average:      0.4116 secs
+  Requests/sec: 2173.4023
   
-  Total data:   18000 bytes
-  Size/request: 60 bytes
+  Total data:   570000 bytes
+  Size/request: 57 bytes
 
 Response time histogram:
-  0.009 [1]     |■
-  0.042 [34]    |■■■■■■■■■■■■■■■■■■
-  0.075 [34]    |■■■■■■■■■■■■■■■■■■
-  0.107 [19]    |■■■■■■■■■■
-  0.140 [15]    |■■■■■■■■
-  0.173 [39]    |■■■■■■■■■■■■■■■■■■■■■
-  0.206 [74]    |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  0.238 [23]    |■■■■■■■■■■■■
-  0.271 [21]    |■■■■■■■■■■■
-  0.304 [23]    |■■■■■■■■■■■■
-  0.336 [17]    |■■■■■■■■■
+  0.074 [1]     |
+  0.308 [3428]  |■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.541 [5316]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.775 [550]   |■■■■
+  1.009 [185]   |■
+  1.242 [188]   |■
+  1.476 [40]    |
+  1.710 [48]    |
+  1.943 [79]    |■
+  2.177 [53]    |
+  2.410 [112]   |■
 
 
 Latency distribution:
-  10% in 0.0377 secs
-  25% in 0.0855 secs
-  50% in 0.1762 secs
-  75% in 0.2188 secs
-  90% in 0.2850 secs
-  95% in 0.3070 secs
-  99% in 0.3328 secs
+  10% in 0.2009 secs
+  25% in 0.2743 secs
+  50% in 0.3448 secs
+  75% in 0.3930 secs
+  90% in 0.5877 secs
+  95% in 1.1330 secs
+  99% in 2.3743 secs
 
 Details (average, fastest, slowest):
-  DNS+dialup:   0.0021 secs, 0.0094 secs, 0.3363 secs
-  DNS-lookup:   0.0000 secs, 0.0000 secs, 0.0000 secs
-  req write:    0.0004 secs, 0.0000 secs, 0.0095 secs
-  resp wait:    0.1578 secs, 0.0066 secs, 0.3257 secs
-  resp read:    0.0001 secs, 0.0000 secs, 0.0026 secs
+  DNS+dialup:   0.0257 secs, 0.0742 secs, 2.4104 secs
+  DNS-lookup:   0.0044 secs, 0.0000 secs, 0.0891 secs
+  req write:    0.0000 secs, 0.0000 secs, 0.0143 secs
+  resp wait:    0.3752 secs, 0.0742 secs, 2.0914 secs
+  resp read:    0.0000 secs, 0.0000 secs, 0.0053 secs
 
 Status code distribution:
-  [200] 300 responses
+  [200] 10000 responses
 ```

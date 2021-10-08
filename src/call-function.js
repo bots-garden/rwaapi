@@ -6,10 +6,13 @@ let functionName = process.argv[2]
 initializeWasm(`../src/${functionName}/pkg/${functionName}_bg.wasm`).then(() => {
   console.log(handle(
     JSON.stringify({
-      name:"Bob Morane"
+      name:"Jane Doe"
     }),
     JSON.stringify({
-      demo_token: "this is a token"
+      rwaapi_data: "default data",
+      rwaapi_token: "token",
+      rwaapi_function_name: functionName,
+      rwaapi_function_version: "???"
     })
   )) 
 
@@ -20,10 +23,13 @@ initializeWasm(`../src/${functionName}/pkg/${functionName}_bg.wasm`).then(() => 
 initializeWasm(`../src/${functionName}/pkg/${functionName}_bg.wasm`).then(() => {
   console.log(handle(
     JSON.stringify({
-      name:"Bob Morane"
+      name:"John Doe"
     }),
     JSON.stringify({
-      demo_token: "this is another token"
+      rwaapi_data: "default data",
+      rwaapi_token: "token",
+      rwaapi_function_name: functionName,
+      rwaapi_function_version: "???"
     })
   )) 
 

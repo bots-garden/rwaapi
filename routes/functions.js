@@ -15,15 +15,22 @@ async function wasmForkFunctions (fastify, options) {
   function_version="0.0.0"
   http POST "${url_api}/functions/${function_name}/${function_version}" \
       name=Bob \
-      DEMO_TOKEN:"hello world"
+      rwaapi_data:"hello world" \
+      rwaapi_token:"tada"
   */
 
   fastify.post(`/functions/:function_name/:function_version`, async (request, reply) => {
     let jsonParameters = request.body
     let headers = request.headers
+    
     let functionName = request.params.function_name
     let functionVersion = request.params.function_version
-    
+
+    if(request.headers["rwaapi_data"] === undefined) { request.headers["rwaapi_data"] = `` }
+    if(request.headers["rwaapi_token"] === undefined) { request.headers["rwaapi_token"] = `` }
+    if(request.headers["rwaapi_function_name"] === undefined) { request.headers["rwaapi_function_name"] = functionName }
+    if(request.headers["rwaapi_function_version"] === undefined) { request.headers["rwaapi_function_version"] = functionVersion }
+
     let wasmFile = `${functionName}_v_${functionVersion}.wasm`
 
     var newWasmProcess

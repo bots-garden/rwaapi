@@ -45,7 +45,10 @@ struct Human {
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Headers {
-  demo_token: String
+  rwaapi_data: String,
+  rwaapi_token: String,
+  rwaapi_function_name: String,
+  rwaapi_function_version: String
 }
 #[derive(Serialize, Deserialize, Debug)]
 struct Message {
@@ -60,7 +63,7 @@ pub fn handle(parameters: String, headers: String) -> String {
   let request_headers: Headers = serde_json::from_str(&headers).unwrap();
 
   let message = Message {
-    text: format!("👋 Hello 🤖 {}  | token: {}", human.name, request_headers.demo_token)
+    text: format!("👋 Hello 🤖 {}  | header[rwaapi_data]: {}", human.name, request_headers.rwaapi_data)
   };
   
   return serde_json::to_string(&message).unwrap();
@@ -70,6 +73,13 @@ pub fn handle(parameters: String, headers: String) -> String {
 
 🖐️ the name of the main function is **always** `handle` 🖐️
 
+> **Remark**: the header fields have default values:
+> ```
+> rwaapi_data = ``
+> rwaapi_token = ``
+> rwaapi_function_name = <function_name>
+> rwaapi_function_name = <function_version>
+> ```
 ### Build and "deploy"
 
 - Build the wasm file
@@ -99,7 +109,8 @@ function_version="0.0.0"
 data='{"name":"Bob Morane"}'
 curl -d "${data}" \
       -H "Content-Type: application/json" \
-      -H "DEMO_TOKEN: 'hello world'" \
+      -H "rwaapi_data: 'hello world'" \
+      -H "rwaapi_token: 'tada'" \
       -X POST "${url_api}/functions/${function_name}/${function_version}"
 ```
 
@@ -111,7 +122,8 @@ function_name="hello"
 function_version="0.0.0"
 http POST "${url_api}/functions/${function_name}/${function_version}" \
      name=Bob \
-     DEMO_TOKEN:"hello world"
+     rwaapi_data:"hello world" \
+     rwaapi_token:"tada"
 ```
 
 ## Send "some load" to the RWaAPI web application
@@ -123,53 +135,51 @@ url_api=http://0.0.0.0:8080
 function_name="hello"
 function_version="0.0.0"
 data='{"name":"Bob"}'
-header="DEMO_TOKEN:'hello world'"
 
 hey -n 10000 -c 1000 -m POST -T "Content-Type: application/json" -H "DEMO_TOKEN:hello" -d ${data} "${url_api}/functions/${function_name}/${function_version}" 
 ```
 
 > Result sample:
 ```text
-
 Summary:
-  Total:        4.6011 secs
-  Slowest:      2.4104 secs
-  Fastest:      0.0742 secs
-  Average:      0.4116 secs
-  Requests/sec: 2173.4023
+  Total:        4.0310 secs
+  Slowest:      1.7627 secs
+  Fastest:      0.0306 secs
+  Average:      0.3824 secs
+  Requests/sec: 2480.7763
   
-  Total data:   570000 bytes
-  Size/request: 57 bytes
+  Total data:   660000 bytes
+  Size/request: 66 bytes
 
 Response time histogram:
-  0.074 [1]     |
-  0.308 [3428]  |■■■■■■■■■■■■■■■■■■■■■■■■■■
-  0.541 [5316]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
-  0.775 [550]   |■■■■
-  1.009 [185]   |■
-  1.242 [188]   |■
-  1.476 [40]    |
-  1.710 [48]    |
-  1.943 [79]    |■
-  2.177 [53]    |
-  2.410 [112]   |■
+  0.031 [1]     |
+  0.204 [1145]  |■■■■■■■■
+  0.377 [5941]  |■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■
+  0.550 [1893]  |■■■■■■■■■■■■■
+  0.723 [0]     |
+  0.897 [190]   |■
+  1.070 [20]    |
+  1.243 [84]    |■
+  1.416 [491]   |■■■
+  1.590 [0]     |
+  1.763 [235]   |■■
 
 
 Latency distribution:
-  10% in 0.2009 secs
-  25% in 0.2743 secs
-  50% in 0.3448 secs
-  75% in 0.3930 secs
-  90% in 0.5877 secs
-  95% in 1.1330 secs
-  99% in 2.3743 secs
+  10% in 0.1980 secs
+  25% in 0.2410 secs
+  50% in 0.2643 secs
+  75% in 0.3910 secs
+  90% in 0.7934 secs
+  95% in 1.2554 secs
+  99% in 1.7211 secs
 
 Details (average, fastest, slowest):
-  DNS+dialup:   0.0257 secs, 0.0742 secs, 2.4104 secs
-  DNS-lookup:   0.0044 secs, 0.0000 secs, 0.0891 secs
-  req write:    0.0000 secs, 0.0000 secs, 0.0143 secs
-  resp wait:    0.3752 secs, 0.0742 secs, 2.0914 secs
-  resp read:    0.0000 secs, 0.0000 secs, 0.0053 secs
+  DNS+dialup:   0.0521 secs, 0.0306 secs, 1.7627 secs
+  DNS-lookup:   0.0312 secs, 0.0000 secs, 0.3706 secs
+  req write:    0.0001 secs, 0.0000 secs, 0.0429 secs
+  resp wait:    0.3256 secs, 0.0306 secs, 1.3574 secs
+  resp read:    0.0002 secs, 0.0000 secs, 0.0146 secs
 
 Status code distribution:
   [200] 10000 responses

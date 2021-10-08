@@ -8,7 +8,10 @@ struct Human {
 
 #[derive(Serialize, Deserialize, Debug)]
 struct Headers {
-  demo_token: String
+  rwaapi_data: String,
+  rwaapi_token: String,
+  rwaapi_function_name: String,
+  rwaapi_function_version: String
 }
 #[derive(Serialize, Deserialize, Debug)]
 struct Message {
@@ -22,7 +25,7 @@ pub fn handle(parameters: String, headers: String) -> String {
   let request_headers: Headers = serde_json::from_str(&headers).unwrap();
 
   let message = Message {
-    text: format!("👋 Hello 🤖 {}  | token: {}", human.name, request_headers.demo_token)
+    text: format!("👋 Hello 🤖 {}  | token: {}", human.name, request_headers.rwaapi_data)
   };
 
   return serde_json::to_string(&message).unwrap();

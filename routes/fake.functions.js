@@ -1,11 +1,6 @@
-/*
-- check if the function is already loaded
-- if not, load the function in memory and call it
-- if yes, call it
-*/
 const fork = require('child_process').fork
 
-async function wasmForkFunctions (fastify, options) {
+async function wasmFakeFunctions (fastify, options) {
 
   let wasmProcesses = options.wasmProcesses
 
@@ -19,7 +14,7 @@ async function wasmForkFunctions (fastify, options) {
       rwaapi_token:"tada"
   */
 
-  fastify.post(`/functions/:function_name/:function_version`, async (request, reply) => {
+  fastify.post(`/fake/functions/:function_name/:function_version`, async (request, reply) => {
     let jsonParameters = request.body
     let headers = request.headers
     
@@ -48,7 +43,7 @@ async function wasmForkFunctions (fastify, options) {
       
     } else {
       // load it, then call it
-      newWasmProcess = fork("./libs/wasm.child.process.js")
+      newWasmProcess = fork("./libs/fake.wasm.child.process.js")
       wasmProcesses[wasmFile] = newWasmProcess
 
       newWasmProcess.send({
@@ -77,4 +72,4 @@ async function wasmForkFunctions (fastify, options) {
   })
 }
 
-module.exports = wasmForkFunctions
+module.exports = wasmFakeFunctions

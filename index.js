@@ -13,6 +13,11 @@ fastify.register(require('./routes/functions.js'), {
   wasmProcesses: wasmProcesses
 })
 
+// this route allows to compare load testing results
+fastify.register(require('./routes/fake.functions.js'), {
+  wasmProcesses: wasmProcesses
+})
+
 const start = async () => {
   try {
     await fastify.listen(8080, "0.0.0.0")

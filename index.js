@@ -1,6 +1,8 @@
 const fastify = require('fastify')({ logger: true })
 const path = require('path')
 
+// 🧰 Initialize sttings
+
 // Serve the static assets
 fastify.register(require('fastify-static'), {
   root: path.join(__dirname, 'public'),

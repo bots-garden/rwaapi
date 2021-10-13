@@ -32,11 +32,13 @@ function loadWasmFile(message, process) {
     {
       cmd: "load",
       wasmFile: wasmFile,
+      wasmFunctionsFolder:"../functions",
       jsonParameters: jsonParameters,
       headers: headers
     }
   */
-  initializeWasm(`../functions/${message.wasmFile}`).then(() => {
+
+  initializeWasm(`../${message.wasmFunctionsFolder}/${message.wasmFile}`).then(() => {
 
     global.wasmFunction = handle
     global.wasmFile = message.wasmFile

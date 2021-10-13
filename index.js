@@ -14,13 +14,28 @@ fastify.register(require('fastify-static'), {
   prefix: '/'
 })
 
+fastify.register(require('fastify-formbody'))
+fastify.register(require('fastify-multipart'))
+
+// Environment variables
+const adminRwaapiToken = process.env.ADMIN_RWAAPI_TOKEN || ""
+
 const wasmProcesses = {}
 
+// 👋 execute the function
 fastify.register(require('./routes/functions.js'), {
-  wasmProcesses: wasmProcesses
+  wasmProcesses: wasmProcesses,
+  wasmFunctionsFolder: "functions"
 })
 
-// this route allows to compare load testing results
+// 👋 remotely deploy a function
+fastify.register(require('./routes/deploy.js'), {
+  wasmProcesses: wasmProcesses,
+  adminRwaapiToken: adminRwaapiToken,
+  wasmFunctionsFolder: "functions"
+})
+
+// 🖐️ this route allows to compare load testing results
 fastify.register(require('./routes/fake.functions.js'), {
   wasmProcesses: wasmProcesses
 })

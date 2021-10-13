@@ -8,6 +8,7 @@ const fork = require('child_process').fork
 async function wasmForkFunctions (fastify, options) {
 
   let wasmProcesses = options.wasmProcesses
+  let wasmFunctionsFolder = options.wasmFunctionsFolder
 
   /*
   url_api=$(gp url 8080)
@@ -42,6 +43,7 @@ async function wasmForkFunctions (fastify, options) {
       newWasmProcess.send({
         cmd: "exec",
         wasmFile: wasmFile,
+        //wasmFunctionsFolder: wasmFunctionsFolder,
         jsonParameters: jsonParameters,
         headers: headers
       })
@@ -54,6 +56,7 @@ async function wasmForkFunctions (fastify, options) {
       newWasmProcess.send({
         cmd: "load",
         wasmFile: wasmFile,
+        wasmFunctionsFolder: wasmFunctionsFolder,
         jsonParameters: jsonParameters,
         headers: headers
       })

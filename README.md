@@ -95,7 +95,21 @@ pub fn handle(parameters: String, headers: String) -> String {
 ## Start RWaAPI
 
 ```bash
-npm start
+ADMIN_RWAAPI_TOKEN="ILOVEPANDA" npm start
+```
+
+## Deploy the function remotely
+
+```bash
+url_api=http://0.0.0.0:8080
+rwaapi_admin_token="ILOVEPANDA"
+function_name="hello"
+wasm_file="hello.wasm"
+function_version="0.0.0"
+curl -F "${function_name}=@${wasm_file}" \
+  -H "Content-Type: multipart/form-data" \
+  -H "ADMIN_RWAAPI_TOKEN: ${rwaapi_admin_token}" \
+  -X POST ${url_api}/functions/publish/${function_version}
 ```
 
 ## Call the function

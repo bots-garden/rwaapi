@@ -18,14 +18,14 @@ const wasmProcesses = {}
 // 👋 execute the function
 fastify.register(require('./routes/functions.js'), {
   wasmProcesses: wasmProcesses,
-  wasmFunctionsFolder: "../functions"
+  wasmFunctionsFolder: "functions"
 })
 
 // 👋 remotely deploy a function
 fastify.register(require('./routes/deploy.js'), {
   wasmProcesses: wasmProcesses,
   adminRwaapiToken: adminRwaapiToken,
-  wasmFunctionsFolder: "../functions"
+  wasmFunctionsFolder: "functions"
 })
 
 // 🖐️ this route allows to compare load testing results

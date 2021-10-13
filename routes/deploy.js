@@ -78,7 +78,7 @@ async function deployWasmFunction (fastify, options) {
       const wasmFile = await streamToFile({isString:false, stream:data.file})
       // Write the file on disk
       // ${wasmFunctionsFolder}
-      fs.writeFileSync(`./functions/${data.fieldname}_v_${version}.wasm`, wasmFile)
+      fs.writeFileSync(`./${wasmFunctionsFolder}/${data.fieldname}_v_${version}.wasm`, wasmFile)
 
       reply
         .header('Content-Type', 'application/json; charset=utf-8')

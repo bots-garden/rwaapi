@@ -38,7 +38,7 @@ function loadWasmFile(message, process) {
     }
   */
 
-  initializeWasm(`${message.wasmFunctionsFolder}/${message.wasmFile}`).then(() => {
+  initializeWasm(`../${message.wasmFunctionsFolder}/${message.wasmFile}`).then(() => {
 
     global.wasmFunction = handle
     global.wasmFile = message.wasmFile

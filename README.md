@@ -3,7 +3,7 @@ Rust WebAssembly Application Programming Interface
 
 > 🚧 this is a work in progress (and a poc)
 
-[![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/k33g/rwaapi)
+[![Open in GitPod](https://gitpod.io/button/open-in-gitpod.svg)](https://gitpod.io/#https://github.com/bots-garden/rwaapi)
 
 ## Create a Rust function
 

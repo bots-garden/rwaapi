@@ -95,7 +95,7 @@ pub fn handle(parameters: String, headers: String) -> String {
 ## Start RWaAPI
 
 ```bash
-npm start
+ADMIN_RWAAPI_TOKEN="ILOVEPANDA" npm start
 ```
 
 ## Call the function

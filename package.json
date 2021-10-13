@@ -5,7 +5,9 @@
 	"license": "MIT",
 	"dependencies": {
 		"fastify": "^3.6.0",
-		"fastify-static": "^3.2.1"
+		"fastify-formbody": "^5.1.0",
+		"fastify-multipart": "^5.0.2",
+		"fastify-static": "^4.4.2"
 	},
 	"scripts": {
 		"start": "node index.js"
